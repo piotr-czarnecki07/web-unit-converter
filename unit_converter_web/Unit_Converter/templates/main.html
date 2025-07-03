@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'master.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <title>Main Page</title>
+</head>
+<body>
+    <header>
+        <a href="/length">Length</a>
+        <a href="/mass">Mass</a>
+        <a href="/temperature">Temperature</a>
+    </header>
+    <div class="container">
+        <div id="hello_message">
+            <h1 id="title">Unit Converter</h1>
+            <div id="subtitle">
+                Unit Converter is a tool that simplifies the process of converting between different units of measurement.
+                It covers such units as: length, weight, temperature.
+                The interface is straightforward, allowing users to select the type of conversion, choose the units, and input a value to receive an accurate result instantly.
+                This makes it useful for anyone needing quick, reliable conversions in everyday situations.
+            </div>
+        </div>
+        <div id="history">
+            <div id="history_title" onclick="showHide()">See History</div>
+            <ol id="history_list" style="visibility: hidden;">
+                {% if not empty %}
+                {% for convert in converts %}
+                <li>Converting {{ convert.input_value }} <span id="output_in_unit">{{ convert.input_unit }}</span> to <span id="output_out_unit">{{ convert.output_unit }}</span> on <span id="at">{{convert.created_at}}</span></li>
+                {% endfor %}
+                {% else %}
+                <li>No converts had been made yet, vist one of the pages to convert.</li>
+                {% endif %}
+            </ol>
+        </div>
+    </div>
+    <script>
+        let history_list = document.getElementById("history_list");
+        function showHide(){
+            if (history_list.style.visibility == "hidden") history_list.style.visibility = "visible";
+            else history_list.style.visibility = "hidden";
+        }
+    </script>
+</body>
+</html>

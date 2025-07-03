@@ -1,0 +1,5 @@
+env/
+unit_converter_web/db.sqlite3
+unit_converter_web/.env
+unit_converter_web/static_files/
+**/__pycache__/

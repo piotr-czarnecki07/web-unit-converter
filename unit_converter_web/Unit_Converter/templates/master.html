@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'master.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <a href="/" id="mainhref">Back to Main Page</a>
+    </header>
+    <h1 id="title">{% block titlebody %}{% endblock %}</h1>
+    <div id="subtitle">{% block subtitle %}{% endblock %}</div><br>
+    <center>
+        {% if submitted %}
+            <div id="output">
+                {% if last.input_unit != 'celsius' and last.input_unit != 'fahrenheit' and last.input_unit != 'kelvin' %}
+                    {% if output != "Form was not submitted" and output != "Input or output unit was not specified" %}
+                        <div id="outputmessage">The result of converting {{ last.input_value }} <span id="output_in_unit">{{ last.input_unit }}s</span> to <span id="output_out_unit">{{ last.output_unit }}s</span><br><br></div>
+                    {% endif %}
+                    <span id="output_value">{{ output }}</span>
+                    {% if output != "Form was not submitted" and output != "Input or output unit was not specified" %}
+                        <span id="literal_output">{{ last.output_unit }}s</span>
+                    {% endif %}
+                {% else %}
+                    {% if output != "Form was not submitted" and output != "Input or output unit was not specified" %}
+                        <div id="outputmessage">The result of converting {{ last.input_value }} <span id="output_in_unit">{{ last.input_unit }}</span> to <span id="output_out_unit">{{ last.output_unit }}</span><br><br></div>
+                    {% endif %}
+                    <span id="output_value">{{ output }}</span>
+                    {% if output != "Form was not submitted" and output != "Input or output unit was not specified" %}
+                        <span id="literal_output">{{ last.output_unit }}</span>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% else %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        {% endif %}
+    </center>
+</body>
+</html>
