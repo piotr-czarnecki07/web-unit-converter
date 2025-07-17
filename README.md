@@ -10,6 +10,12 @@ Made conversions are saved to the local database and are accessible through hist
 > If the website is to be hosted, the `ALLOWED_HOSTS` variable should be updated to match the domain. \
 > The history section is actually a list of all conversions made on the website, as there are no user accounts.
 
+## Table of Contests
+- [Setting up the Environment](#setting-up-the-enviroment)
+- [How to Use](#how-to-use)
+- [License](#license)
+- [Credits](#credits)
+
 ## Setting up the Environment
 1. Ensure Python 3.13+ is installed.
 2. Create a virtual environment for the project in the project's root directory, for example, by navigating to the project's root with `cd` and running `py -m venv venv`.
